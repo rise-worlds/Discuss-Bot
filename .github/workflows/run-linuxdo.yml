@@ -24,6 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install playwright requests tabulate configparser
+        playwright install-deps
         playwright install
 
     - name: Run script
