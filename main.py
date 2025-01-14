@@ -128,6 +128,11 @@ class LinuxDoBrowser:
         self.browser = self.pw.firefox.launch(headless=True)
         self.context = self.browser.new_context()
         self.page = self.context.new_page()
+        init_script = """
+        Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+        Object.defineProperty(window, 'webdriver', {get: () => undefined});
+        """
+        self.page.add_init_script(init_script)
         logging.info(f"导航到 {HOME_URL}...")
         self.page.goto(HOME_URL)
         logging.info("初始化完成。")
